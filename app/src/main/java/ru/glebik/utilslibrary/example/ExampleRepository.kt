@@ -1,7 +1,11 @@
-package ru.glebik.utilslibrary.repository
+package ru.glebik.utilslibrary.example
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import ru.glebik.utilslibrary.repository.Parameters
+import ru.glebik.utilslibrary.repository.RepositoryProperty
+import ru.glebik.utilslibrary.repository.inMemoryRepositoryProperty
+import ru.glebik.utilslibrary.repository.repositoryProperty
 import ru.glebik.utilslibrary.repository.sources.CachedSource
 
 data class ExampleResponse(
@@ -53,13 +57,13 @@ class ExampleRepository(
     }
 }
 
-class ExampleService() {
+class ExampleService {
     fun getItem(id: Int, count: String): ExampleResponse {
         throw NotImplementedError("STUB")
     }
 }
 
-class CacheSourceForExampleResponse() : CachedSource<ExampleResponse, ExampleParameters>  {
+class CacheSourceForExampleResponse : CachedSource<ExampleResponse, ExampleParameters>  {
     override suspend fun get(param: ExampleParameters): ExampleResponse? {
         //Тут обращаемся к базе данных
         throw NotImplementedError("STUB")
