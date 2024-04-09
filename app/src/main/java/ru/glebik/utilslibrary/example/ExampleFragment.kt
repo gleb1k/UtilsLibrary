@@ -7,7 +7,13 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
 import ru.glebik.utilslibrary.R
+import ru.glebik.utilslibrary.adapter.CompositeAdapter
+import ru.glebik.utilslibrary.adapter.castAdapterDelegate
+import ru.glebik.utilslibrary.example.adapter.DateAdapter
+import ru.glebik.utilslibrary.example.adapter.ExampleItem
+import ru.glebik.utilslibrary.example.adapter.SomeAdapter
 import ru.glebik.utilslibrary.keyboard.KeyboardHelper
 import ru.glebik.utilslibrary.keyboard.KeyboardVisibilityListener
 import ru.glebik.utilslibrary.keyboard.closeOnDone
@@ -15,7 +21,7 @@ import ru.glebik.utilslibrary.keyboard.closeOnDone
 class ExampleFragment : Fragment() {
 
     private val keyboardListener = object : KeyboardVisibilityListener {
-        override fun onKeyboardShown()  {
+        override fun onKeyboardShown() {
             //Что-то сделать когда клавиатура в фокусе
             //Например как-то изменить ui
         }
@@ -28,6 +34,14 @@ class ExampleFragment : Fragment() {
 
     private lateinit var button: Button
     private lateinit var editText: EditText
+    private lateinit var recycler: RecyclerView
+
+    private val rvAdapter: CompositeAdapter<ExampleItem> by lazy {
+        CompositeAdapter(
+            DateAdapter().castAdapterDelegate(),
+            SomeAdapter().castAdapterDelegate()
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,6 +54,10 @@ class ExampleFragment : Fragment() {
             editText = findViewById<EditText?>(R.id.et_example).apply {
                 //При нажатии Done будет убрана клавиатура, а также очищен фокус
                 closeOnDone()
+            }
+
+            recycler = findViewById<RecyclerView?>(R.id.rv_example).apply {
+                adapter = rvAdapter
             }
         }
     }
