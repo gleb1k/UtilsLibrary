@@ -11,7 +11,7 @@ interface AuthTokenManager {
     fun clearAuthData()
 }
 
-internal class AuthTokenManagerImpl(
+class AuthTokenManagerImpl(
     accessPrefName: String = ACCESS_KEY,
     refreshPrefName: String = REFRESH_KEY,
 ) : AuthTokenManager {

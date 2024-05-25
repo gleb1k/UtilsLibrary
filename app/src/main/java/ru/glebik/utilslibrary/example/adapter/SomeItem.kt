@@ -6,9 +6,9 @@ class SomeItem(
     val someModel: SomeUiModel,
 ) : ExampleItem {
 
-    override fun areItemsSame(other: ru.glebik.utilslibrary.adapter.DiffListItem): Boolean = other is SomeItem
+    override fun areItemsSame(other: DiffListItem): Boolean = other is SomeItem
 
-    override fun areContentsSame(other: ru.glebik.utilslibrary.adapter.DiffListItem): Boolean = other is SomeItem
+    override fun areContentsSame(other: DiffListItem): Boolean = other is SomeItem
             && other.someModel == someModel
 
 }

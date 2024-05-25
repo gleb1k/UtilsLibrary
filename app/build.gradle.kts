@@ -51,7 +51,7 @@ android {
 
 dependencies {
 
-    implementation("com.google.android.gms:play-services-location:21.2.0")
+    implementation(project(":UtilsLibrary"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

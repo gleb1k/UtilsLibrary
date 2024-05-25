@@ -6,9 +6,9 @@ class DateItem(
     val date: DateUiModel,
 ) : ExampleItem {
 
-    override fun areItemsSame(other: ru.glebik.utilslibrary.adapter.DiffListItem): Boolean = other is DateItem
+    override fun areItemsSame(other: DiffListItem): Boolean = other is DateItem
 
-    override fun areContentsSame(other: ru.glebik.utilslibrary.adapter.DiffListItem): Boolean = other is DateItem
+    override fun areContentsSame(other: DiffListItem): Boolean = other is DateItem
             && other.date == date
 
 }

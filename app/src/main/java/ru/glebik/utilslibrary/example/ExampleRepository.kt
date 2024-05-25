@@ -15,7 +15,7 @@ data class ExampleResponse(
 data class ExampleParameters(
     val id: Int,
     val name: String,
-) : ru.glebik.utilslibrary.repository.Parameters
+) : Parameters
 
 class ExampleRepository(
     service: ExampleService,
@@ -24,8 +24,8 @@ class ExampleRepository(
     /**
      * Приватное свойство, которое хранит состояние вызовов и кеш в оперативной памяти
      */
-    private val exampleProperty: ru.glebik.utilslibrary.repository.RepositoryProperty<ExampleResponse, ExampleParameters> =
-        ru.glebik.utilslibrary.repository.inMemoryRepositoryProperty(
+    private val exampleProperty: RepositoryProperty<ExampleResponse, ExampleParameters> =
+        inMemoryRepositoryProperty(
             remoteSource = { params ->
                 service.getItem(params.id, params.name)
             }
@@ -35,8 +35,8 @@ class ExampleRepository(
      * Приватное свойство, которое хранит состояние вызовов и данные в кастомном локальном хранилище,
      * например в базе данных
      */
-    private val examplePropertyDataBase: ru.glebik.utilslibrary.repository.RepositoryProperty<ExampleResponse, ExampleParameters> =
-        ru.glebik.utilslibrary.repository.repositoryProperty(
+    private val examplePropertyDataBase: RepositoryProperty<ExampleResponse, ExampleParameters> =
+        repositoryProperty(
             remoteSource = { params ->
                 service.getItem(params.id, params.name)
             },
@@ -64,8 +64,7 @@ class ExampleService {
     }
 }
 
-class CacheSourceForExampleResponse :
-    ru.glebik.utilslibrary.repository.sources.CachedSource<ExampleResponse, ExampleParameters> {
+class CacheSourceForExampleResponse : CachedSource<ExampleResponse, ExampleParameters> {
     override suspend fun get(param: ExampleParameters): ExampleResponse? {
         //Тут обращаемся к базе данных
         throw NotImplementedError("STUB")

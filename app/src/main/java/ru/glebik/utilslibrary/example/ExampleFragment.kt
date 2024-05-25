@@ -21,7 +21,7 @@ import ru.glebik.utilslibrary.keyboard.closeOnDone
 class ExampleFragment : Fragment() {
 
     private val keyboardListener = object :
-        ru.glebik.utilslibrary.keyboard.KeyboardVisibilityListener {
+        KeyboardVisibilityListener {
         override fun onKeyboardShown() {
             //Что-то сделать когда клавиатура в фокусе
             //Например как-то изменить ui
@@ -37,8 +37,8 @@ class ExampleFragment : Fragment() {
     private lateinit var editText: EditText
     private lateinit var recycler: RecyclerView
 
-    private val rvAdapter: ru.glebik.utilslibrary.adapter.CompositeAdapter<ExampleItem> by lazy {
-        ru.glebik.utilslibrary.adapter.CompositeAdapter(
+    private val rvAdapter: CompositeAdapter<ExampleItem> by lazy {
+        CompositeAdapter(
             DateAdapter().castAdapterDelegate(),
             SomeAdapter().castAdapterDelegate()
         )
@@ -68,19 +68,22 @@ class ExampleFragment : Fragment() {
 
         //При нажатии кнопки прятать клавиатуру
         button.setOnClickListener {
-            ru.glebik.utilslibrary.keyboard.KeyboardHelper.hideKeyboard(view)
+            KeyboardHelper.hideKeyboard(view)
         }
     }
 
     override fun onResume() {
         super.onResume()
         //Регистрируем листенер
-        ru.glebik.utilslibrary.keyboard.KeyboardHelper.registerListener(requireActivity(), keyboardListener)
+        KeyboardHelper.registerListener(
+            requireActivity(),
+            keyboardListener
+        )
     }
 
     override fun onStop() {
         //Чистим листенер
-        ru.glebik.utilslibrary.keyboard.KeyboardHelper.unregisterListener(keyboardListener)
+        KeyboardHelper.unregisterListener(keyboardListener)
         super.onStop()
     }
 }

@@ -8,12 +8,12 @@ import ru.glebik.utilslibrary.adapter.AdapterDelegate
 import ru.glebik.utilslibrary.adapter.DelegateViewHolder
 import ru.glebik.utilslibrary.adapter.ListItem
 
-class DateAdapter : ru.glebik.utilslibrary.adapter.AdapterDelegate<DateItem> {
-    override fun isForViewType(item: ru.glebik.utilslibrary.adapter.ListItem): Boolean = item is DateItem
+class DateAdapter : AdapterDelegate<DateItem> {
+    override fun isForViewType(item: ListItem): Boolean = item is DateItem
     override fun createViewHolder(
         inflater: LayoutInflater,
         parent: ViewGroup,
-    ): ru.glebik.utilslibrary.adapter.DelegateViewHolder<DateItem> {
+    ): DelegateViewHolder<DateItem> {
         return DateViewHolder(
             inflater.inflate(R.layout.item_date, parent, false),
         )
@@ -21,7 +21,7 @@ class DateAdapter : ru.glebik.utilslibrary.adapter.AdapterDelegate<DateItem> {
 
     class DateViewHolder(
         view: View,
-    ) : ru.glebik.utilslibrary.adapter.DelegateViewHolder<DateItem>(view) {
+    ) : DelegateViewHolder<DateItem>(view) {
 
         override fun bind(item: DateItem) {
             with(item.date) {
