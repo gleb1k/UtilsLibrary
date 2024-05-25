@@ -11,7 +11,7 @@ object KeyboardHelper {
 
     private class OnGlobalLayoutListenerImpl(
         val root: View,
-        val keyboardListener: KeyboardVisibilityListener
+        val keyboardListener: KeyboardVisibilityListener,
     ) : ViewTreeObserver.OnGlobalLayoutListener {
 
         enum class State { SHOWN, HIDDEN }
@@ -50,7 +50,7 @@ object KeyboardHelper {
 
     fun registerListener(
         activity: Activity,
-        listener: KeyboardVisibilityListener
+        listener: KeyboardVisibilityListener,
     ) {
         if (activity !is ActivityRootProvider)
             throw IllegalArgumentException("Activity must implement ActivityRootProvider")

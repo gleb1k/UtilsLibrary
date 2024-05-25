@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 
 class CompositeAdapter<T : DiffListItem>(
-    private val delegates: List<AdapterDelegate<T>>
+    private val delegates: List<AdapterDelegate<T>>,
 ) : RecyclerView.Adapter<DelegateViewHolder<T>>() {
 
     constructor(vararg delegates: AdapterDelegate<T>) : this(delegates.toList())
@@ -28,8 +28,8 @@ class CompositeAdapter<T : DiffListItem>(
         return delegates[viewType].createViewHolder(LayoutInflater.from(parent.context), parent)
     }
 
-    override fun onBindViewHolder(holder: DelegateViewHolder<T>, position: Int)
-        = holder.bind(data[position])
+    override fun onBindViewHolder(holder: DelegateViewHolder<T>, position: Int) =
+        holder.bind(data[position])
 
     fun updateData(newData: List<T>) {
         val callback = DiffUtilsCallback(

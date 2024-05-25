@@ -20,7 +20,8 @@ import ru.glebik.utilslibrary.keyboard.closeOnDone
 
 class ExampleFragment : Fragment() {
 
-    private val keyboardListener = object : KeyboardVisibilityListener {
+    private val keyboardListener = object :
+        ru.glebik.utilslibrary.keyboard.KeyboardVisibilityListener {
         override fun onKeyboardShown() {
             //Что-то сделать когда клавиатура в фокусе
             //Например как-то изменить ui
@@ -36,8 +37,8 @@ class ExampleFragment : Fragment() {
     private lateinit var editText: EditText
     private lateinit var recycler: RecyclerView
 
-    private val rvAdapter: CompositeAdapter<ExampleItem> by lazy {
-        CompositeAdapter(
+    private val rvAdapter: ru.glebik.utilslibrary.adapter.CompositeAdapter<ExampleItem> by lazy {
+        ru.glebik.utilslibrary.adapter.CompositeAdapter(
             DateAdapter().castAdapterDelegate(),
             SomeAdapter().castAdapterDelegate()
         )
@@ -46,7 +47,7 @@ class ExampleFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         return inflater.inflate(R.layout.fragment_example, container, false).apply {
             button = findViewById(R.id.btn_example)
@@ -67,19 +68,19 @@ class ExampleFragment : Fragment() {
 
         //При нажатии кнопки прятать клавиатуру
         button.setOnClickListener {
-            KeyboardHelper.hideKeyboard(view)
+            ru.glebik.utilslibrary.keyboard.KeyboardHelper.hideKeyboard(view)
         }
     }
 
     override fun onResume() {
         super.onResume()
         //Регистрируем листенер
-        KeyboardHelper.registerListener(requireActivity(), keyboardListener)
+        ru.glebik.utilslibrary.keyboard.KeyboardHelper.registerListener(requireActivity(), keyboardListener)
     }
 
     override fun onStop() {
         //Чистим листенер
-        KeyboardHelper.unregisterListener(keyboardListener)
+        ru.glebik.utilslibrary.keyboard.KeyboardHelper.unregisterListener(keyboardListener)
         super.onStop()
     }
 }

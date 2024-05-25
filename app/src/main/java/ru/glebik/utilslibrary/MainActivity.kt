@@ -16,12 +16,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import ru.glebik.utilslibrary.keyboard.ActivityRootProvider
 import ru.glebik.utilslibrary.ui.theme.UtilsLibraryTheme
 
-class MainActivity : AppCompatActivity(), ActivityRootProvider {
+class MainActivity : AppCompatActivity(), ru.glebik.utilslibrary.keyboard.ActivityRootProvider {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
     }
 
-    override fun root(): View  = findViewById(R.id.container)
+    override fun root(): View = findViewById(R.id.container)
 }
